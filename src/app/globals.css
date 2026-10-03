@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+/* ---------- Design tokens: Cooperativa Multiamericas — "Cálido y solidario" ---------- */
+@theme {
+  --color-forest: #173a2c;
+  --color-forest-2: #0e2a1f;
+  --color-moss: #3f6b45;
+  --color-leaf: #5e9c3f;
+  --color-sage: #b9cdb5;
+  --color-petal: #b3321f;
+  --color-petal-soft: #e0573f;
+  --color-sun: #f0a92c;
+  --color-sand: #fbf7ef;
+  --color-cream: #f1e8d6;
+  --color-clay: #e6dcc7;
+  --color-ink: #1e2b24;
+  --color-bark: #4a574f;
+  --color-stone: #6b776f;
+
+  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --bg: var(--color-sand);
+  --fg: var(--color-ink);
+  --muted: var(--color-bark);
+  --line: var(--color-clay);
+  --accent: var(--color-petal);
+  --on-accent: #ffffff;
+  --glow: rgba(240, 169, 44, 0.22);
+  --cursor: var(--color-petal);
+  --cursor-text: #ffffff;
+  color-scheme: light;
+}
+
+.theme-dark {
+  --fg: #f7efd9;
+  --muted: #b9cdb5;
+  --line: rgba(247, 239, 217, 0.14);
+  --accent: var(--color-sun);
+  --on-accent: var(--color-forest);
+  color: var(--fg);
+}
+
+html {
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-petal);
+  color: #fff;
+}
+
+html.has-cursor,
+html.has-cursor a,
+html.has-cursor button {
+  cursor: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-petal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Film grain overlay */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  30% { transform: translate(3%, -15%); }
+  50% { transform: translate(12%, 9%); }
+  70% { transform: translate(9%, 4%); }
+  90% { transform: translate(-1%, 7%); }
+}
+
+.marquee-track {
+  animation: marquee linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Range inputs */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--line);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 20%, transparent);
+  cursor: grab;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+@keyframes drift {
+  from { transform: translateX(-10%); }
+  to { transform: translateX(10%); }
+}
+.animate-drift { animation: drift 18s ease-in-out infinite alternate; }
+
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.animate-spin-slow { animation: spin-slow 40s linear infinite; }
