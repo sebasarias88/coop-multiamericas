@@ -53,12 +53,12 @@ const snapshot = () => {
 /** Live "open now" badge based on Colombian time. */
 export function OpenStatus({ className }: { className?: string }) {
   const status = useSyncExternalStore(subscribe, snapshot, () => null);
-  if (!status) return <span className={cn("inline-flex h-9 w-56 rounded-full bg-cream", className)} aria-hidden />;
+  if (!status) return <span className={cn("inline-flex h-9 w-56 rounded-full bg-paper", className)} aria-hidden />;
   return (
-    <span className={cn("inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-semibold text-forest backdrop-blur", className)} role="status">
+    <span className={cn("inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-semibold text-ink backdrop-blur", className)} role="status">
       <span className="relative flex h-2.5 w-2.5">
         {status.open && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-leaf opacity-60" />}
-        <span className={cn("relative inline-flex h-2.5 w-2.5 rounded-full", status.open ? "bg-leaf" : "bg-petal")} />
+        <span className={cn("relative inline-flex h-2.5 w-2.5 rounded-full", status.open ? "bg-leaf" : "bg-brand")} />
       </span>
       {status.label}
     </span>

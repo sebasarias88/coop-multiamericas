@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/bricolage-grotesque";
-import "@fontsource-variable/figtree";
+import "@fontsource-variable/schibsted-grotesk";
+import "@fontsource-variable/onest";
 import "./globals.css";
 import { site } from "@/content/site";
 import { SmoothScroll } from "@/components/core/SmoothScroll";
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-export const viewport: Viewport = { themeColor: "#173a2c" };
+export const viewport: Viewport = { themeColor: "#e3262e" };
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -46,11 +46,17 @@ const jsonLd = {
   openingHours: ["Mo-Fr 08:00-12:00", "Mo-Fr 14:00-18:00", "Sa 09:00-12:00"],
 };
 
+const introScript = `(function(){try{var d=document.documentElement;var m=function(q){return window.matchMedia(q).matches};if(m("(max-width: 767px)")||m("(prefers-reduced-motion: reduce)")||sessionStorage.getItem("coop-intro")==="1"){d.dataset.intro="done"}}catch(e){document.documentElement.dataset.intro="done"}})();`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es-CO">
-      <body className="grain min-h-screen">
-        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[300] focus:rounded-full focus:bg-petal focus:px-4 focus:py-2 focus:text-white">
+    <html lang="es-CO" suppressHydrationWarning>
+      <head>
+        {/* Decides before first paint whether the intro plays, so hero text can animate with CSS alone. */}
+        <script dangerouslySetInnerHTML={{ __html: introScript }} />
+      </head>
+      <body className="min-h-screen bg-white">
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[300] focus:rounded-full focus:bg-brand focus:px-4 focus:py-2 focus:text-white">
           Saltar al contenido
         </a>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
