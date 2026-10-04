@@ -20,7 +20,9 @@ export function Preloader() {
       seen = sessionStorage.getItem("coop-intro") === "1";
       sessionStorage.setItem("coop-intro", "1");
     } catch {}
-    if (seen || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // Phones skip the intro entirely so content (LCP) paints immediately.
+    const small = window.matchMedia("(max-width: 767px)").matches;
+    if (seen || small || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       const skip = requestAnimationFrame(() => {
         setVisible(false);
         markIntroDone();
@@ -32,7 +34,7 @@ export function Preloader() {
       setVisible(false);
       window.__lenis?.start();
       markIntroDone();
-    }, 1900);
+    }, 1300);
     return () => clearTimeout(t);
   }, []);
 
@@ -45,7 +47,7 @@ export function Preloader() {
           exit={{ clipPath: "circle(0% at 50% 50%)" }}
           initial={{ clipPath: "circle(150% at 50% 50%)" }}
           transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[200] grid place-items-center bg-ink"
+          className="fixed inset-0 z-[200] grid place-items-center bg-ink max-md:hidden"
         >
           <div className="flex flex-col items-center gap-8">
             <motion.svg viewBox="-50 -50 100 100" className="h-32 w-32" animate={{ rotate: 120 }} transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}>

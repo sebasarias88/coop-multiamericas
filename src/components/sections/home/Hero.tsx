@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
 import { ArrowUpRight, Calculator, PiggyBank, ShieldCheck, Sparkles } from "lucide-react";
 import { hero, site, smmlv } from "@/content/site";
@@ -59,19 +59,11 @@ export function Hero() {
             lines={["Juntos construimos", "un futuro", { text: "próspero y solidario.", className: "text-brand" }]}
             className="mt-8 font-display text-[12.5vw] font-black leading-[0.92] tracking-[-0.05em] text-ink sm:text-7xl lg:text-[4.3rem] xl:text-[4.9rem]"
           />
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.9 }}
-            className="mt-7 max-w-xl text-lg leading-relaxed text-graphite"
+          <motion.p className="intro-fade mt-7 max-w-xl text-lg leading-relaxed text-graphite" style={{ "--d": "600ms" } as CSSProperties}
           >
             {site.tagline}
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.75, duration: 0.9 }}
-            className="mt-9 flex flex-wrap gap-3"
+          <motion.div className="intro-fade mt-9 flex flex-wrap gap-3" style={{ "--d": "750ms" } as CSSProperties}
           >
             <Magnetic>
               <Link href="/asociarme" className="group inline-flex items-center gap-2 rounded-full bg-brand px-7 py-4 font-semibold text-white shadow-[0_18px_40px_-14px_rgba(227,38,46,0.7)] transition-transform hover:scale-[1.03]">
@@ -119,7 +111,7 @@ export function Hero() {
             className="relative aspect-[5/6] overflow-hidden rounded-[44px]"
           >
             <motion.div style={{ y: photoY }} className="absolute inset-[-8%_0]">
-              <Image src={teamCelebration} alt="Asociados celebrando un logro en la oficina" fill priority placeholder="blur" sizes="(min-width:1024px) 540px, 100vw" className="object-cover object-[40%_50%]" />
+              <Image src={teamCelebration} alt="Asociados celebrando un logro en la oficina" fill preload placeholder="blur" sizes="(min-width:1024px) 540px, 100vw" className="object-cover object-[40%_50%]" />
             </motion.div>
             <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent" />
           </motion.div>
