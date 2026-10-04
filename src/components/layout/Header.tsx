@@ -47,7 +47,7 @@ export function Header() {
         <div
           className={cn(
             "mx-auto flex max-w-[1320px] items-center justify-between rounded-full px-4 py-2.5 transition-all duration-500 md:px-5",
-            light ? "bg-transparent" : "border border-line bg-sand/85 shadow-[0_10px_40px_-20px_rgba(23,58,44,0.35)] backdrop-blur-xl",
+            light ? "bg-transparent" : "border border-line bg-snow/85 shadow-[0_10px_40px_-20px_rgba(23,58,44,0.35)] backdrop-blur-xl",
           )}
         >
           <Link href="/" aria-label="Cooperativa Las Américas — inicio">
@@ -63,12 +63,12 @@ export function Header() {
                   href={item.href}
                   className={cn(
                     "relative rounded-full px-4 py-2 text-[15px] font-semibold transition-colors",
-                    "text-bark hover:text-forest",
-                    active && "text-forest",
+                    "text-graphite hover:text-ink",
+                    active && "text-ink",
                   )}
                 >
                   {active && (
-                    <motion.span layoutId="nav-pill" className={"absolute inset-0 -z-10 rounded-full bg-cream"} />
+                    <motion.span layoutId="nav-pill" className={"absolute inset-0 -z-10 rounded-full bg-paper"} />
                   )}
                   {item.label}
                 </Link>
@@ -80,7 +80,7 @@ export function Header() {
             <Magnetic className="hidden md:inline-flex">
               <Link
                 href="/asociarme"
-                className="group inline-flex items-center gap-2 rounded-full bg-petal px-5 py-2.5 text-sm font-bold text-white transition-transform hover:scale-[1.03]"
+                className="group inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white transition-transform hover:scale-[1.03]"
               >
                 Quiero asociarme
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45" />
@@ -93,11 +93,11 @@ export function Header() {
               aria-controls="mobile-menu"
               aria-label={open ? "Cerrar menú" : "Abrir menú"}
               className={cn(
-                "relative grid h-11 w-11 place-items-center rounded-full border border-forest/20 lg:hidden",
+                "relative grid h-11 w-11 place-items-center rounded-full border border-ink/20 lg:hidden",
               )}
             >
-              <span className={cn("absolute h-0.5 w-5 rounded transition-transform duration-500", "bg-forest", open ? "rotate-45" : "-translate-y-1")} />
-              <span className={cn("absolute h-0.5 w-5 rounded transition-transform duration-500", "bg-forest", open ? "-rotate-45" : "translate-y-1")} />
+              <span className={cn("absolute h-0.5 w-5 rounded transition-transform duration-500", "bg-ink", open ? "rotate-45" : "-translate-y-1")} />
+              <span className={cn("absolute h-0.5 w-5 rounded transition-transform duration-500", "bg-ink", open ? "-rotate-45" : "translate-y-1")} />
             </button>
           </div>
         </div>
@@ -111,7 +111,7 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[65] flex flex-col justify-between bg-sand px-6 pb-10 pt-32"
+            className="fixed inset-0 z-[65] flex flex-col justify-between bg-snow px-6 pb-10 pt-32"
           >
             <nav aria-label="Móvil" className="flex flex-col gap-1">
               {[{ href: "/", label: "Inicio" }, ...site.nav].map((item, i) => (
@@ -121,13 +121,13 @@ export function Header() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.08 + i * 0.05, duration: 0.5 }}
                 >
-                  <Link href={item.href} className="block border-b border-line py-4 font-display text-4xl font-extrabold text-forest">
+                  <Link href={item.href} className="block border-b border-line py-4 font-display text-4xl font-black text-ink">
                     {item.label}
                   </Link>
                 </motion.div>
               ))}
             </nav>
-            <a href={`https://wa.me/${site.whatsapp}`} className="rounded-full bg-forest px-6 py-5 text-center font-bold text-sand">
+            <a href={`https://wa.me/${site.whatsapp}`} className="rounded-full bg-ink px-6 py-5 text-center font-bold text-snow">
               Escríbenos por WhatsApp
             </a>
           </motion.div>

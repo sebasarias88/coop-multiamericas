@@ -1,47 +1,47 @@
 @import "tailwindcss";
 
-/* ---------- Design tokens: Cooperativa Multiamericas — "Cálido y solidario" ---------- */
+/* ---------- Design tokens: Cooperativa Multiamericas — "Banca moderna roja" ---------- */
 @theme {
-  --color-forest: #173a2c;
-  --color-forest-2: #0e2a1f;
-  --color-moss: #3f6b45;
-  --color-leaf: #5e9c3f;
-  --color-sage: #b9cdb5;
-  --color-petal: #b3321f;
-  --color-petal-soft: #e0573f;
-  --color-sun: #f0a92c;
-  --color-sand: #fbf7ef;
-  --color-cream: #f1e8d6;
-  --color-clay: #e6dcc7;
-  --color-ink: #1e2b24;
-  --color-bark: #4a574f;
-  --color-stone: #6b776f;
+  --color-brand: #e3262e;
+  --color-brand-soft: #ff4d55;
+  --color-brand-deep: #b3121b;
+  --color-blush: #fde9ea;
+  --color-ink: #111113;
+  --color-ink-2: #1d1d21;
+  --color-graphite: #48484f;
+  --color-smoke: #7a7a82;
+  --color-silver: #b8b8c0;
+  --color-line: #e8e5e0;
+  --color-paper: #f5f4f1;
+  --color-snow: #ffffff;
+  --color-sun: #ffc233;
+  --color-leaf: #1fa463;
 
-  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Schibsted Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Onest Variable", ui-sans-serif, system-ui, sans-serif;
 
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root {
-  --bg: var(--color-sand);
+  --bg: #ffffff;
   --fg: var(--color-ink);
-  --muted: var(--color-bark);
-  --line: var(--color-clay);
-  --accent: var(--color-petal);
+  --muted: var(--color-graphite);
+  --line: var(--color-line);
+  --accent: var(--color-brand);
   --on-accent: #ffffff;
-  --glow: rgba(240, 169, 44, 0.22);
-  --cursor: var(--color-petal);
+  --glow: rgba(227, 38, 46, 0.12);
+  --cursor: var(--color-brand);
   --cursor-text: #ffffff;
   color-scheme: light;
 }
 
 .theme-dark {
-  --fg: #f7efd9;
-  --muted: #b9cdb5;
-  --line: rgba(247, 239, 217, 0.14);
-  --accent: var(--color-sun);
-  --on-accent: var(--color-forest);
+  --fg: #ffffff;
+  --muted: #b8b8c0;
+  --line: rgba(255, 255, 255, 0.14);
+  --accent: var(--color-brand);
+  --on-accent: #ffffff;
   color: var(--fg);
 }
 
@@ -67,7 +67,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-petal);
+  background: var(--color-brand);
   color: #fff;
 }
 
@@ -78,7 +78,7 @@ html.has-cursor button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-petal);
+  outline: 2px solid var(--color-brand);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -155,11 +155,22 @@ input[type="range"]::-moz-range-thumb {
 }
 .animate-float { animation: float 6s ease-in-out infinite; }
 
-@keyframes drift {
-  from { transform: translateX(-10%); }
-  to { transform: translateX(10%); }
-}
-.animate-drift { animation: drift 18s ease-in-out infinite alternate; }
-
 @keyframes spin-slow { to { transform: rotate(360deg); } }
-.animate-spin-slow { animation: spin-slow 40s linear infinite; }
+.spin-slow, .animate-spin-slow { animation: spin-slow 30s linear infinite; transform-origin: 50% 50%; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+/* Soft app-like card shadow */
+.shadow-app { box-shadow: 0 1px 0 rgba(17, 17, 19, 0.04), 0 30px 60px -30px rgba(17, 17, 19, 0.28); }
+
+/* Red outline display text */
+.text-outline-brand { color: transparent; -webkit-text-stroke: 1.5px var(--color-brand); }
+
+.dots {
+  background-image: radial-gradient(rgba(17, 17, 19, 0.12) 1px, transparent 1px);
+  background-size: 18px 18px;
+}

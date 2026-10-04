@@ -28,9 +28,9 @@ export function MembershipTabs() {
             role="tab"
             aria-selected={tab === t.key}
             onClick={() => setTab(t.key)}
-            className={cn("relative shrink-0 rounded-full px-5 py-3 font-bold transition-colors", tab === t.key ? "text-white" : "bg-white text-bark hover:text-forest")}
+            className={cn("relative shrink-0 rounded-full px-5 py-3 font-bold transition-colors", tab === t.key ? "text-white" : "bg-white text-graphite hover:text-ink")}
           >
-            {tab === t.key && <motion.span layoutId="member-tab" className="absolute inset-0 rounded-full bg-forest" />}
+            {tab === t.key && <motion.span layoutId="member-tab" className="absolute inset-0 rounded-full bg-ink" />}
             <span className="relative">{t.label}</span>
           </button>
         ))}
@@ -53,12 +53,12 @@ export function MembershipTabs() {
               className="flex items-start gap-4 rounded-3xl bg-white p-6"
             >
               <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-leaf/15 text-leaf"><Check className="h-4 w-4" /></span>
-              <span className="pt-1.5 text-forest">{it}</span>
+              <span className="pt-1.5 text-ink">{it}</span>
             </motion.li>
           ))}
         </motion.ol>
       </AnimatePresence>
-      {tab === "rights" && <p className="mt-6 text-sm text-stone">{membership.rightsNote}</p>}
+      {tab === "rights" && <p className="mt-6 text-sm text-smoke">{membership.rightsNote}</p>}
     </div>
   );
 }

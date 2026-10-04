@@ -1,95 +1,194 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
-import { ArrowUpRight, Calculator } from "lucide-react";
-import { hero, site } from "@/content/site";
+import { ArrowUpRight, Calculator, PiggyBank, ShieldCheck, Sparkles } from "lucide-react";
+import { hero, site, smmlv } from "@/content/site";
+import { teamCelebration } from "@/assets/images";
 import { SplitHeading } from "@/components/core/SplitHeading";
 import { Magnetic } from "@/components/core/Magnetic";
 import { OpenStatus } from "@/components/core/OpenStatus";
+import { Marquee } from "@/components/core/Marquee";
+import { Flower } from "@/components/layout/Logo";
 
-const layers = [
-  { d: "M0 330 C180 230 300 280 440 200 C580 120 700 240 860 180 C1020 120 1140 210 1440 150 L1440 800 L0 800 Z", fill: "#B9CDB5", speed: 0.15, mouse: 6 },
-  { d: "M0 420 C200 340 330 400 520 330 C700 265 860 360 1040 300 C1160 260 1300 290 1440 270 L1440 800 L0 800 Z", fill: "#8DB083", speed: 0.3, mouse: 12 },
-  { d: "M0 520 C220 450 420 500 640 450 C860 400 1060 480 1440 420 L1440 800 L0 800 Z", fill: "#5E8A57", speed: 0.5, mouse: 20 },
-  { d: "M0 620 C260 570 520 600 760 575 C1000 550 1180 590 1440 570 L1440 800 L0 800 Z", fill: "#3F6B45", speed: 0.7, mouse: 30 },
-  { d: "M0 700 C300 660 560 690 820 670 C1080 650 1260 680 1440 670 L1440 800 L0 800 Z", fill: "#173A2C", speed: 0.9, mouse: 40 },
-];
+const ticker = ["Aporte contractual", "Crédito de libre inversión", "Crédito educativo", "Crédito solidario", "Seguros", "Bienestar social", "Exento del 4×1000"];
+const cop = (v: number) => v.toLocaleString("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 });
 
-function Layer({ layer, progress, mx }: { layer: (typeof layers)[number]; progress: ReturnType<typeof useScroll>["scrollYProgress"]; mx: ReturnType<typeof useSpring> }) {
-  const y = useTransform(progress, [0, 1], [0, -layer.speed * 260]);
-  const x = useTransform(mx, (v) => v * layer.mouse);
-  return (
-    <motion.svg style={{ y, x }} viewBox="0 0 1440 800" preserveAspectRatio="xMidYMax slice" className="absolute inset-x-[-4%] bottom-0 h-full w-[108%]" aria-hidden>
-      <path d={layer.d} fill={layer.fill} />
-    </motion.svg>
-  );
-}
-
-/** Quindío-inspired landscape with parallax mountain layers, drifting fog and a rising sun. */
+/** Neobank-style hero: bold type, framed people photo and floating app cards. */
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const years = new Date().getFullYear() - site.foundedYear;
+  const fee = Math.ceil((smmlv.value * 0.05) / 1000) * 1000;
+
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const mouse = useMotionValue(0);
-  const mx = useSpring(mouse, { stiffness: 40, damping: 20 });
-  const sunY = useTransform(scrollYProgress, [0, 1], [0, 220]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, -120]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const photoY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
+  const cardsY = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const c1x = useSpring(useTransform(mx, [-1, 1], [-22, 22]), { stiffness: 60, damping: 18 });
+  const c1y = useSpring(useTransform(my, [-1, 1], [-16, 16]), { stiffness: 60, damping: 18 });
+  const c2x = useSpring(useTransform(mx, [-1, 1], [18, -18]), { stiffness: 60, damping: 18 });
+  const c2y = useSpring(useTransform(my, [-1, 1], [12, -12]), { stiffness: 60, damping: 18 });
 
   return (
     <section
       ref={ref}
-      onPointerMove={(e) => mouse.set((e.clientX / window.innerWidth - 0.5) * -1)}
-      className="relative min-h-[100svh] overflow-hidden pb-[40vh] md:pb-[46vh] bg-[linear-gradient(180deg,#FBF7EF_0%,#F8E6C8_55%,#F3D3A4_100%)]"
+      onPointerMove={(e) => {
+        mx.set((e.clientX / window.innerWidth) * 2 - 1);
+        my.set((e.clientY / window.innerHeight) * 2 - 1);
+      }}
+      className="relative overflow-hidden bg-white pt-28 md:pt-32"
     >
-      <motion.div style={{ y: sunY }} aria-hidden className="absolute right-[10%] top-[38%] hidden h-40 w-40 md:block rounded-full bg-sun opacity-80 blur-[2px] md:h-56 md:w-56" />
-      <div aria-hidden className="animate-drift absolute left-[-10%] top-[45%] h-24 w-[70%] rounded-full bg-white/70 blur-3xl" />
+      <div aria-hidden className="dots absolute right-0 top-0 h-[60%] w-1/2 [mask-image:radial-gradient(ellipse_at_top_right,black,transparent_70%)]" />
 
-      <div className="absolute inset-x-0 bottom-0 h-[42%] md:h-[48%]">
-        {layers.map((l, i) => (
-          <Layer key={i} layer={l} progress={scrollYProgress} mx={mx} />
-        ))}
-        <div aria-hidden className="animate-drift absolute bottom-[28%] left-[20%] h-16 w-[60%] rounded-full bg-white/50 blur-2xl [animation-duration:24s]" />
+      <div className="relative mx-auto grid max-w-[1320px] items-center gap-14 px-6 pb-16 md:px-10 lg:grid-cols-[1.1fr_1fr] lg:pb-24">
+        <motion.div style={{ y: textY }}>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-blush px-3 py-1.5 text-sm font-semibold text-brand">
+              <Sparkles className="h-3.5 w-3.5" /> {hero.badge}
+            </span>
+            <OpenStatus className="border border-line bg-white" />
+          </div>
+          <SplitHeading
+            as="h1"
+            immediate
+            lines={["Juntos construimos", "un futuro", { text: "próspero y solidario.", className: "text-brand" }]}
+            className="mt-8 font-display text-[12.5vw] font-black leading-[0.92] tracking-[-0.05em] text-ink sm:text-7xl lg:text-[4.3rem] xl:text-[4.9rem]"
+          />
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.9 }}
+            className="mt-7 max-w-xl text-lg leading-relaxed text-graphite"
+          >
+            {site.tagline}
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.75, duration: 0.9 }}
+            className="mt-9 flex flex-wrap gap-3"
+          >
+            <Magnetic>
+              <Link href="/asociarme" className="group inline-flex items-center gap-2 rounded-full bg-brand px-7 py-4 font-semibold text-white shadow-[0_18px_40px_-14px_rgba(227,38,46,0.7)] transition-transform hover:scale-[1.03]">
+                Quiero asociarme <ArrowUpRight className="h-5 w-5 transition-transform group-hover:rotate-45" />
+              </Link>
+            </Magnetic>
+            <Link href="/simulador" className="inline-flex items-center gap-2 rounded-full border-2 border-ink px-7 py-[14px] font-semibold text-ink transition-colors hover:bg-ink hover:text-white">
+              <Calculator className="h-5 w-5" /> Simular mi crédito
+            </Link>
+          </motion.div>
+          <motion.ul
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 1 }}
+            className="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-line pt-6"
+          >
+            <li>
+              <p className="font-display text-3xl font-black tracking-tight text-ink">{years}</p>
+              <p className="text-sm text-smoke">años de historia</p>
+            </li>
+            <li>
+              <p className="font-display text-3xl font-black tracking-tight text-ink">4×1000</p>
+              <p className="text-sm text-smoke">exento en aportes</p>
+            </li>
+            <li>
+              <p className="font-display text-3xl font-black tracking-tight text-ink">60</p>
+              <p className="text-sm text-smoke">meses de plazo</p>
+            </li>
+          </motion.ul>
+        </motion.div>
+
+        {/* Visual */}
+        <div className="relative mx-auto w-full max-w-[500px]">
+          <motion.div
+            initial={{ rotate: -14, scale: 0.8, opacity: 0 }}
+            animate={{ rotate: -6, scale: 1, opacity: 1 }}
+            transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
+            aria-hidden
+            className="absolute inset-0 translate-x-6 translate-y-6 rounded-[44px] bg-brand"
+          />
+          <motion.div
+            initial={{ clipPath: "inset(100% 0% 0% 0% round 44px)" }}
+            animate={{ clipPath: "inset(0% 0% 0% 0% round 44px)" }}
+            transition={{ duration: 1.3, delay: 0.2, ease: [0.76, 0, 0.24, 1] }}
+            className="relative aspect-[5/6] overflow-hidden rounded-[44px]"
+          >
+            <motion.div style={{ y: photoY }} className="absolute inset-[-8%_0]">
+              <Image src={teamCelebration} alt="Asociados celebrando un logro en la oficina" fill priority placeholder="blur" sizes="(min-width:1024px) 540px, 100vw" className="object-cover object-[40%_50%]" />
+            </motion.div>
+            <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent" />
+          </motion.div>
+
+          <motion.div style={{ y: cardsY }} className="pointer-events-none absolute inset-0">
+            <motion.div
+              style={{ x: c1x, y: c1y }}
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="shadow-app absolute -left-4 top-10 w-56 rounded-3xl bg-white p-4 sm:-left-14"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-smoke">Cuota estimada</span>
+                <span className="grid h-7 w-7 place-items-center rounded-full bg-blush text-brand"><Calculator className="h-3.5 w-3.5" /></span>
+              </div>
+              <p className="mt-2 font-display text-2xl font-black tracking-tight text-ink">Simúlala</p>
+              <div className="mt-3 flex h-10 items-end gap-1" aria-hidden>
+                {[40, 55, 35, 70, 50, 85, 65, 95].map((h, i) => (
+                  <motion.span key={i} initial={{ scaleY: 0 }} animate={{ scaleY: 1 }} transition={{ delay: 1.3 + i * 0.06 }} className="flex-1 origin-bottom rounded-sm bg-brand/80" style={{ height: `${h}%` }} />
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              style={{ x: c2x, y: c2y }}
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.2, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="shadow-app absolute -right-2 bottom-24 w-60 rounded-3xl bg-ink p-4 text-white sm:-right-10"
+            >
+              <div className="flex items-center gap-3">
+                <span className="grid h-10 w-10 place-items-center rounded-2xl bg-white/10 text-sun"><PiggyBank className="h-5 w-5" /></span>
+                <div>
+                  <p className="text-xs text-silver">Aporte social de ingreso</p>
+                  <p className="font-display text-xl font-black">{cop(fee)}</p>
+                </div>
+              </div>
+              <p className="mt-3 rounded-xl bg-white/10 px-3 py-2 text-xs text-silver">5% del SMMLV {smmlv.year}</p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.4, duration: 0.7 }}
+              className="shadow-app absolute -bottom-5 left-8 flex items-center gap-2 rounded-full bg-white py-2 pl-2 pr-4"
+            >
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-leaf/15 text-leaf"><ShieldCheck className="h-4 w-4" /></span>
+              <span className="text-sm font-semibold text-ink">Seguro de vida incluido</span>
+            </motion.div>
+
+            <div className="absolute -right-6 -top-6 hidden sm:block">
+              <Flower className="spin-slow h-20 w-20 drop-shadow-xl" />
+            </div>
+          </motion.div>
+        </div>
       </div>
 
-      <motion.div style={{ y: textY, opacity: textOpacity }} className="relative z-10 mx-auto max-w-[1320px] px-6 pt-32 md:px-10 md:pt-40">
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="rounded-full bg-forest px-4 py-2 text-sm font-semibold text-sand">
-            {hero.badge} · desde {site.foundedYear}
-          </span>
-          <OpenStatus />
-        </div>
-        <SplitHeading
-          as="h1"
-          immediate
-          lines={[hero.title]}
-          className="mt-8 max-w-5xl font-display text-[13vw] font-extrabold leading-[0.95] tracking-[-0.04em] text-forest sm:text-7xl lg:text-8xl xl:text-[6.6rem]"
-        />
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.9 }}
-          className="mt-8 max-w-xl text-lg leading-relaxed text-bark md:text-xl"
-        >
-          {site.tagline}
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.75, duration: 0.9 }}
-          className="mt-10 flex flex-wrap gap-3"
-        >
-          <Magnetic>
-            <Link href="/asociarme" className="group inline-flex items-center gap-2 rounded-full bg-petal px-7 py-4 font-bold text-white shadow-[0_20px_40px_-15px_rgba(179,50,31,0.6)] transition-transform hover:scale-[1.03]">
-              Quiero asociarme <ArrowUpRight className="h-5 w-5 transition-transform group-hover:rotate-45" />
-            </Link>
-          </Magnetic>
-          <Link href="/simulador" className="inline-flex items-center gap-2 rounded-full bg-white/80 px-7 py-4 font-bold text-forest backdrop-blur transition-colors hover:bg-white">
-            <Calculator className="h-5 w-5" /> Simular mi crédito
-          </Link>
-        </motion.div>
-      </motion.div>
+      <div className="relative -rotate-1 bg-brand py-5">
+        <Marquee speed={36}>
+          {ticker.map((t) => (
+            <span key={t} className="mx-6 inline-flex items-center gap-6 font-display text-2xl font-black tracking-tight text-white md:text-3xl">
+              {t}
+              <Flower className="h-6 w-6 [&_circle]:fill-brand [&_ellipse]:fill-white" />
+            </span>
+          ))}
+        </Marquee>
+      </div>
+      <div className="h-6 bg-white" />
     </section>
   );
 }
