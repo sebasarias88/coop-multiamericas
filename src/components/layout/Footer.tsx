@@ -32,7 +32,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-20 grid gap-12 md:grid-cols-4">
+        <div className="mt-20 grid gap-12 md:grid-cols-[1.3fr_1fr_1.2fr]">
           <div className="space-y-4">
             <Logo tone="light" />
             <p className="max-w-xs text-sm leading-relaxed text-silver">{site.tagline}</p>
@@ -46,15 +46,9 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <p className="mb-4 font-display text-xs font-bold uppercase tracking-[0.2em] text-brand-soft">Horario</p>
-            <ul className="space-y-2 text-sm text-silver">
-              {site.hoursText.map((h) => <li key={h}>{h}</li>)}
-            </ul>
-          </div>
-          <div>
-            <p className="mb-4 font-display text-xs font-bold uppercase tracking-[0.2em] text-brand-soft">Agencia Armenia</p>
+            <p className="mb-4 font-display text-xs font-bold uppercase tracking-[0.2em] text-brand-soft">Contacto</p>
             <address className="space-y-2 text-sm not-italic text-silver">
-              <p>{site.address.street}<br />{site.address.city}, {site.address.region}</p>
+              <p>{site.address.city}, {site.address.country}</p>
               <a href={site.phoneHref} className="block hover:text-white">{site.phone}</a>
               <a href={`mailto:${site.emails.service}`} className="block break-all hover:text-white">{site.emails.service}</a>
               <a href={`mailto:${site.emails.legal}`} className="block break-all hover:text-white">{site.emails.legal}</a>

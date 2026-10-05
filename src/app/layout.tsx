@@ -14,11 +14,11 @@ import { Preloader } from "@/components/layout/Preloader";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | Cooperativa de aporte y crédito en Armenia`,
+    default: `${site.name} | Cooperativa de aporte y crédito en Bogotá`,
     template: `%s | ${site.shortName}`,
   },
   description: site.description,
-  keywords: ["cooperativa", "aporte y crédito", "crédito de libre inversión", "crédito educativo", "ahorro", "Armenia Quindío", "Multiamericas"],
+  keywords: ["cooperativa", "aporte y crédito", "crédito de libre inversión", "crédito educativo", "ahorro", "Bogotá", "Multiamericas"],
   openGraph: {
     type: "website",
     locale: "es_CO",
@@ -42,8 +42,7 @@ const jsonLd = {
   telephone: site.phone,
   email: site.emails.service,
   foundingDate: String(site.foundedYear),
-  address: { "@type": "PostalAddress", streetAddress: site.address.street, addressLocality: site.address.city, addressRegion: site.address.region, addressCountry: "CO" },
-  openingHours: ["Mo-Fr 08:00-12:00", "Mo-Fr 14:00-18:00", "Sa 09:00-12:00"],
+  address: { "@type": "PostalAddress", addressLocality: site.address.city, addressCountry: "CO" },
 };
 
 const introScript = `(function(){try{var d=document.documentElement;var m=function(q){return window.matchMedia(q).matches};if(m("(max-width: 767px)")||m("(prefers-reduced-motion: reduce)")||sessionStorage.getItem("coop-intro")==="1"){d.dataset.intro="done"}}catch(e){document.documentElement.dataset.intro="done"}})();`;

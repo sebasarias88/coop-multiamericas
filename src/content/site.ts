@@ -11,7 +11,7 @@ export const site = {
   tagline:
     "Somos una entidad cooperativa de aporte y crédito comprometida en satisfacer con calidad y eficiencia las necesidades de nuestros asociados.",
   description:
-    "Cooperativa de aporte y crédito en Armenia, Quindío, desde 1998. Aportes con beneficios, crédito de libre inversión, educativo y solidario, seguros y bienestar para el asociado y su familia.",
+    "Cooperativa de aporte y crédito en Bogotá, desde 1998. Aportes con beneficios, crédito de libre inversión, educativo y solidario, seguros y bienestar para el asociado y su familia.",
   phone: "+57 315 365 2532",
   phoneHref: "tel:+573153652532",
   whatsapp: "573153652532",
@@ -19,19 +19,7 @@ export const site = {
     service: "servicioalcliente@coopmultiamericas.com",
     legal: "notificacionesjudiciales@coopmultiamericas.com",
   },
-  address: {
-    street: "Calle 13 #13-61, oficina 304, centro",
-    city: "Armenia",
-    region: "Quindío",
-    mapsQuery: "Calle 13 13-61 Armenia Quindío Colombia",
-  },
-  /** Opening hours, America/Bogota. day: 0 = Sunday. */
-  hours: [
-    { days: [1, 2, 3, 4, 5], open: "08:00", close: "12:00" },
-    { days: [1, 2, 3, 4, 5], open: "14:00", close: "18:00" },
-    { days: [6], open: "09:00", close: "12:00" },
-  ],
-  hoursText: ["Lunes a viernes: 8:00 a. m. – 12:00 m. y 2:00 p. m. – 6:00 p. m.", "Sábados: 9:00 a. m. – 12:00 m."],
+  address: { city: "Bogotá", country: "Colombia" },
   nav: [
     { href: "/quienes-somos", label: "Nosotros" },
     { href: "/servicios", label: "Servicios" },
@@ -46,6 +34,9 @@ export const site = {
  * 2026: $1.750.905 (Decretos 1469 y 1470 de 2025). Update every January.
  */
 export const smmlv = { year: 2026, value: 1_750_905 };
+
+/** Social contribution paid once when joining (COP). */
+export const entryContribution = 70_000;
 
 export const hero = {
   badge: "Cooperativa de aporte y crédito",
@@ -161,7 +152,7 @@ export const membership = {
     "Ser legalmente capaz, o menor de edad con 14 años cumplidos (o menor que se asocie a través de su representante legal).",
     "Comprobar buena conducta y gozar de buen crédito.",
     "Residir en Colombia.",
-    "Suscribir y pagar aportes sociales equivalentes al 5% del SMMLV (redondeado al millar siguiente), pagados en su totalidad al ingresar.",
+    "Suscribir y pagar el aporte social de ingreso de $70.000, pagado en su totalidad al ingresar.",
     "Pagar la cuota de admisión que reglamente el Consejo de Administración.",
   ],
   legal: [
@@ -216,7 +207,7 @@ export const service = {
     "Cómo vincularte como asociado o ahorrador",
     "Asesoría de productos y servicios",
     "Estado de tu solicitud de crédito",
-    "Horarios de atención y recaudo",
+    "Canales de atención y recaudo",
     "Acceso a la agencia virtual y demás servicios",
     "Eventos culturales y recreativos",
     "Quejas, reclamos y opiniones",
