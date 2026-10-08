@@ -20,6 +20,8 @@ const nextConfig: NextConfig = {
       { source: "/simuladores", destination: "/simulador", permanent: true },
       { source: "/consulta-de-saldos", destination: "/atencion", permanent: true },
       { source: "/descarga-de-formularios", destination: "/asociarme", permanent: true },
+      { source: "/mantenimiento", destination: "/", permanent: true },
+      { source: "/sample-page", destination: "/", permanent: true },
     ];
   },
   async headers() {

@@ -101,7 +101,7 @@ function CreditSimulator() {
       <div className="theme-dark flex flex-col justify-between gap-8 bg-ink p-6 md:p-10">
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.14em] text-silver">Cuota mensual estimada</p>
-          <AnimatePresence mode="popLayout">
+          <AnimatePresence mode="popLayout" initial={false}>
             <motion.p
               key={Math.round(payment)}
               initial={{ y: 20, opacity: 0 }}
@@ -236,7 +236,7 @@ export function Simulator() {
           </button>
         ))}
       </div>
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" initial={false}>
         <motion.div key={tab} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.3 }}>
           {tab === "credit" ? <CreditSimulator /> : <SavingsSimulator />}
         </motion.div>

@@ -41,7 +41,7 @@ export function QuickServices() {
             >
               <span aria-hidden className="absolute inset-0 origin-bottom scale-y-0 bg-brand transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100" />
               <div className="relative flex items-start justify-between">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-blush text-brand transition-colors duration-500 group-hover:bg-white/15 group-hover:text-white">
+                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-blush text-brand-deep transition-colors duration-500 group-hover:bg-white/15 group-hover:text-white">
                   <Icon className="h-7 w-7" strokeWidth={1.8} />
                 </span>
                 <span className="font-display text-sm font-bold text-silver transition-colors group-hover:text-white/60">0{i + 1}</span>
@@ -78,9 +78,9 @@ export function PrinciplesStack() {
     <ol className="relative">
       {about.principles.map((p, i) => (
         <li key={p} className="sticky" style={{ top: `${100 + i * 16}px` }}>
-          <div className={cn("mb-6 flex min-h-[240px] flex-col justify-between gap-8 rounded-[40px] p-8 shadow-[0_-24px_50px_-30px_rgba(0,0,0,0.45)] md:min-h-[300px] md:flex-row md:items-end md:p-12", styles[i])}>
+          <div className={cn("mb-6 flex min-h-[240px] flex-col gap-6 md:justify-between md:gap-8 rounded-[40px] p-8 shadow-[0_-24px_50px_-30px_rgba(0,0,0,0.45)] md:min-h-[300px] md:flex-row md:items-start md:p-12", styles[i])}>
             <span className="font-display text-8xl font-black leading-none tracking-[-0.06em] opacity-90 md:text-[10rem]">{String(i + 1).padStart(2, "0")}</span>
-            <p className="max-w-2xl font-display text-2xl font-bold leading-snug tracking-[-0.02em] md:text-4xl">{p}</p>
+            <p className="max-w-2xl font-display md:pt-6 text-2xl font-bold leading-snug tracking-[-0.02em] md:text-4xl">{p}</p>
           </div>
         </li>
       ))}

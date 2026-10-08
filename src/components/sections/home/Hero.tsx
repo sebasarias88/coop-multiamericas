@@ -47,7 +47,7 @@ export function Hero() {
       <div className="relative mx-auto grid max-w-[1320px] items-center gap-14 px-6 pb-16 md:px-10 lg:grid-cols-[1.1fr_1fr] lg:pb-24">
         <motion.div style={{ y: textY }}>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-blush px-3 py-1.5 text-sm font-semibold text-brand">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-blush px-3 py-1.5 text-sm font-semibold text-brand-deep">
               <Sparkles className="h-3.5 w-3.5" /> {hero.badge}
             </span>
           </div>
@@ -124,7 +124,7 @@ export function Hero() {
             >
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-smoke">Cuota estimada</span>
-                <span className="grid h-7 w-7 place-items-center rounded-full bg-blush text-brand"><Calculator className="h-3.5 w-3.5" /></span>
+                <span className="grid h-7 w-7 place-items-center rounded-full bg-blush text-brand-deep"><Calculator className="h-3.5 w-3.5" /></span>
               </div>
               <p className="mt-2 font-display text-2xl font-black tracking-tight text-ink">Simúlala</p>
               <div className="mt-3 flex h-10 items-end gap-1" aria-hidden>
