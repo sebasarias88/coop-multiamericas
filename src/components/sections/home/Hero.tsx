@@ -5,11 +5,10 @@ import Link from "next/link";
 import { useRef, type CSSProperties } from "react";
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
 import { ArrowUpRight, Calculator, PiggyBank, ShieldCheck, Sparkles } from "lucide-react";
-import { hero, site, smmlv } from "@/content/site";
+import { entryContribution, hero, site } from "@/content/site";
 import { teamCelebration } from "@/assets/images";
 import { SplitHeading } from "@/components/core/SplitHeading";
 import { Magnetic } from "@/components/core/Magnetic";
-import { OpenStatus } from "@/components/core/OpenStatus";
 import { Marquee } from "@/components/core/Marquee";
 import { Flower } from "@/components/layout/Logo";
 
@@ -20,7 +19,7 @@ const cop = (v: number) => v.toLocaleString("es-CO", { style: "currency", curren
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const years = new Date().getFullYear() - site.foundedYear;
-  const fee = Math.ceil((smmlv.value * 0.05) / 1000) * 1000;
+  const fee = entryContribution;
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const photoY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
@@ -51,7 +50,6 @@ export function Hero() {
             <span className="inline-flex items-center gap-1.5 rounded-full bg-blush px-3 py-1.5 text-sm font-semibold text-brand">
               <Sparkles className="h-3.5 w-3.5" /> {hero.badge}
             </span>
-            <OpenStatus className="border border-line bg-white" />
           </div>
           <SplitHeading
             as="h1"
@@ -150,7 +148,7 @@ export function Hero() {
                   <p className="font-display text-xl font-black">{cop(fee)}</p>
                 </div>
               </div>
-              <p className="mt-3 rounded-xl bg-white/10 px-3 py-2 text-xs text-silver">5% del SMMLV {smmlv.year}</p>
+              <p className="mt-3 rounded-xl bg-white/10 px-3 py-2 text-xs text-silver">Pago único al ingresar</p>
             </motion.div>
 
             <motion.div

@@ -1,15 +1,10 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { smmlv } from "@/content/site";
+import { entryContribution } from "@/content/site";
 import { Reveal } from "@/components/core/Reveal";
 
-/** Social contribution required to join: 5% of SMMLV rounded up to the next thousand. */
-export function admissionContribution() {
-  return Math.ceil((smmlv.value * 0.05) / 1000) * 1000;
-}
-
 export function MembershipCta() {
-  const fee = admissionContribution().toLocaleString("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 });
+  const fee = entryContribution.toLocaleString("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 });
   return (
     <section className="mx-auto max-w-[1320px] px-6 pb-28 md:px-10 md:pb-36">
       <Reveal>
@@ -23,9 +18,9 @@ export function MembershipCta() {
               </h2>
             </div>
             <div className="rounded-[28px] bg-white/10 p-6 backdrop-blur md:p-8">
-              <p className="text-sm font-semibold text-white/80">Aporte social de ingreso ({smmlv.year})</p>
+              <p className="text-sm font-semibold text-white/80">Aporte social de ingreso</p>
               <p className="mt-1 font-display text-5xl font-black">{fee}</p>
-              <p className="mt-2 text-sm text-white/70">5% del SMMLV, pagado al ingresar. La cuota de admisión la reglamenta el Consejo de Administración.</p>
+              <p className="mt-2 text-sm text-white/70">Pago único al ingresar. La cuota de admisión la reglamenta el Consejo de Administración.</p>
               <Link href="/asociarme" className="group mt-6 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 font-bold text-brand transition-transform hover:scale-[1.03]">
                 Ver requisitos <ArrowUpRight className="h-5 w-5 transition-transform group-hover:rotate-45" />
               </Link>
