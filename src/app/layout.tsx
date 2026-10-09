@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/schibsted-grotesk";
-import "@fontsource-variable/onest";
 import "./globals.css";
+import { fontVariables } from "./fonts";
 import { site } from "@/content/site";
 import { SmoothScroll } from "@/components/core/SmoothScroll";
 import { Cursor } from "@/components/core/Cursor";
@@ -45,11 +44,11 @@ const jsonLd = {
   address: { "@type": "PostalAddress", addressLocality: site.address.city, addressCountry: "CO" },
 };
 
-const introScript = `(function(){try{var d=document.documentElement;var m=function(q){return window.matchMedia(q).matches};if(m("(max-width: 767px)")||m("(prefers-reduced-motion: reduce)")||sessionStorage.getItem("coop-intro")==="1"){d.dataset.intro="done"}}catch(e){document.documentElement.dataset.intro="done"}})();`;
+const introScript = `(function(){try{var d=document.documentElement;var m=function(q){return window.matchMedia(q).matches};if(m("(max-width: 767px)")||m("(prefers-reduced-motion: reduce)")||sessionStorage.getItem("coop-intro")==="1"){d.dataset.intro="done";d.dataset.skipIntro="1"}}catch(e){document.documentElement.dataset.intro="done";document.documentElement.dataset.skipIntro="1"}})();`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es-CO" suppressHydrationWarning>
+    <html lang="es-CO" className={fontVariables} suppressHydrationWarning>
       <head>
         {/* Decides before first paint whether the intro plays, so hero text can animate with CSS alone. */}
         <script dangerouslySetInnerHTML={{ __html: introScript }} />

@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Política de tratamiento de datos pe
 // NOTE: base text aligned with Ley 1581 de 2012; have it reviewed by the cooperative's legal team.
 export default function PrivacyPage() {
   return (
-    <article className="mx-auto max-w-3xl px-6 pb-28 pt-40 text-graphite md:pt-48">
+    <article className="break-words mx-auto max-w-3xl px-6 pb-28 pt-40 text-graphite md:pt-48">
       <p className="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-brand">Legal</p>
       <h1 className="font-display text-4xl font-black tracking-tight text-ink md:text-6xl">Política de tratamiento de datos personales y términos</h1>
       <div className="mt-12 space-y-8 leading-relaxed [&_h2]:mb-3 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-ink">

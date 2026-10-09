@@ -19,7 +19,7 @@ export function PageHero({ label, lines, intro, image }: { label: string; lines:
       <div aria-hidden className="dots absolute right-0 top-0 h-full w-1/2 [mask-image:radial-gradient(ellipse_at_top_right,black,transparent_70%)]" />
       <div className="relative mx-auto grid w-full max-w-[1320px] items-center gap-14 px-6 md:px-10 lg:grid-cols-[1.25fr_1fr]">
         <div>
-          <motion.p className="intro-fade mb-6 inline-flex items-center gap-2 rounded-full bg-blush px-3 py-1.5 text-sm font-semibold text-brand" style={{ "--d": "0ms" } as CSSProperties}
+          <motion.p className="intro-fade mb-6 inline-flex items-center gap-2 rounded-full bg-blush px-3 py-1.5 text-sm font-semibold text-brand-deep" style={{ "--d": "0ms" } as CSSProperties}
           >
             <Flower className="h-4 w-4" /> {label}
           </motion.p>
@@ -27,7 +27,7 @@ export function PageHero({ label, lines, intro, image }: { label: string; lines:
             as="h1"
             immediate
             lines={lines}
-            className="max-w-4xl font-display text-[12.5vw] font-black leading-[0.92] tracking-[-0.05em] text-ink md:text-7xl lg:text-[clamp(3.6rem,9.5svh,5.4rem)]"
+            className="max-w-4xl font-display text-[10.5vw] font-black leading-[0.92] tracking-[-0.05em] text-ink md:text-7xl lg:text-[clamp(3.6rem,9.5svh,5.4rem)]"
           />
           {intro && (
             <motion.p className="intro-fade mt-8 max-w-2xl text-lg leading-relaxed text-graphite md:text-xl" style={{ "--d": "500ms" } as CSSProperties}

@@ -9,7 +9,7 @@
   --color-ink: #111113;
   --color-ink-2: #1d1d21;
   --color-graphite: #48484f;
-  --color-smoke: #7a7a82;
+  --color-smoke: #66666e;
   --color-silver: #b8b8c0;
   --color-line: #e8e5e0;
   --color-paper: #f5f4f1;
@@ -17,8 +17,8 @@
   --color-sun: #ffc233;
   --color-leaf: #1fa463;
 
-  --font-display: "Schibsted Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Onest Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
 
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -237,3 +237,7 @@ html[data-intro="done"] .intro-fade {
 
 /* Grid children may shrink below their content width (prevents horizontal overflow on phones). */
 .grid > * { min-width: 0; }
+
+/* Returning visitors / phones: the pre-paint script sets data-skip-intro, so the
+   server-rendered preloader never covers the page while JS hydrates. */
+html[data-skip-intro] .preloader-root { display: none; }

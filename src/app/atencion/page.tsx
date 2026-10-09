@@ -32,13 +32,13 @@ export default function ServicePage() {
               </span>
             </a>
           </Reveal>
-          <Reveal className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-3xl bg-white p-6">
+          <Reveal className="grid gap-3">
+            <div className="rounded-3xl border border-line bg-white p-6">
               <MapPin className="h-6 w-6 text-brand" />
               <p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-smoke">Ubicación</p>
               <p className="mt-1 font-semibold text-ink">{site.address.city}, {site.address.country}</p>
             </div>
-            <a href={`mailto:${site.emails.service}`} className="rounded-3xl bg-white p-6 hover:shadow-lg">
+            <a href={`mailto:${site.emails.service}`} className="rounded-3xl border border-line bg-white p-6 transition-shadow hover:shadow-lg">
               <Mail className="h-6 w-6 text-brand" />
               <p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-smoke">Correo</p>
               <p className="mt-1 break-all font-semibold text-ink">{site.emails.service}</p>
@@ -53,7 +53,7 @@ export default function ServicePage() {
             </RevealGroup>
           </div>
         </div>
-        <Reveal delay={0.1} className="rounded-[32px] bg-white p-7 md:p-12">
+        <Reveal delay={0.1} className="shadow-app rounded-[32px] border border-line bg-white p-7 md:p-12">
           <h2 className="mb-8 font-display text-3xl font-black tracking-tight text-ink md:text-4xl">Escríbenos</h2>
           <ContactForm whatsapp={site.whatsapp} />
         </Reveal>
